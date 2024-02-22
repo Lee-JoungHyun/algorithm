@@ -1,6 +1,5 @@
 package BOJ;
 
-
 import java.io.*;
 import java.util.*;
 
@@ -68,11 +67,11 @@ public class Main_17471_남혁준 {
         }
 
         init();
-        connection(dequeA);
+        connection(dequeA, true);
         aSum = check(dequeA, true);
 
         init();
-        connection(dequeB);
+        connection(dequeB, false);
         bSum = check(dequeB, false);
 
         if (aSum == Integer.MAX_VALUE || bSum == Integer.MAX_VALUE) {
@@ -82,10 +81,12 @@ public class Main_17471_남혁준 {
         answer = Math.min(answer, Math.abs(aSum - bSum));
     }
 
-    static void connection(Deque<Integer> deque) {
+    static void connection(Deque<Integer> deque, boolean team) {
         for (int cur : deque) {
             for (int val : edges[cur]) {
-                union(cur, val);
+                if (visited[cur] == visited[val] && visited[cur] == team) {
+                    union(cur, val);
+                }
             }
         }
     }
@@ -148,13 +149,13 @@ public class Main_17471_남혁준 {
         }
 
         int same = 0;
-        for (int i = 1; i < root.length; i++) { // 두개의 선거구로 나눌 수 없는 경우 == 모두다 root[i] == i
+        for (int i = 1; i <= N; i++) { // 두개의 선거구로 나눌 수 없는 경우 == 모두다 root[i] == i
             if (i == root[i]) {
                 same++;
             }
         }
 
-        if (same == root.length - 1) { // 두개의 선거구로 나눌 수 없는 경우
+        if ((root.length != 3 && same == root.length - 1) && same == root.length - 1) { // 두개의 선거구로 나눌 수 없는 경우
             answer = -1;
         } else {
             helper(0);
@@ -164,4 +165,5 @@ public class Main_17471_남혁준 {
         br.close();
         bw.close();
     }
+
 }

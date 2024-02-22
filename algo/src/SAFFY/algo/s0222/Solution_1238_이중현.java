@@ -33,28 +33,28 @@ public class Solution_1238_이중현 {
             }// 입력 끝
 
             // BFS로 그래프 탐색 시작!
-            queue.add(start);
-            int end;
-            while (!queue.isEmpty()) {
-                // depth 구분을 위한 qsize 사용
-                int qsize = queue.size();
-                // 같은 depth에서의 Max값을 받기 위한 변수
-                max = Integer.MIN_VALUE;
-                // 1depth 반복
-                while (qsize-- > 0) {
-                    end = queue.poll();
-                    // Max값 초기화
-                    max = Math.max(end, max);
-                    // 다음 연결된 노드중 방문 안된것 방문처리 + queue에 삽입
-                    for (int nxt : graph[end]) {
-                        if(visited[nxt]) continue;
-                        visited[nxt] = true;
-                        queue.add(nxt);
-                    }
+        queue.add(start);
+        int end;
+        while (!queue.isEmpty()) {
+            // depth 구분을 위한 qsize 사용
+            int qsize = queue.size();
+            // 같은 depth에서의 Max값을 받기 위한 변수
+            max = Integer.MIN_VALUE;
+            // 1depth 반복
+            while (qsize-- > 0) {
+                end = queue.poll();
+                // Max값 초기화
+                max = Math.max(end, max);
+                // 다음 연결된 노드중 방문 안된것 방문처리 + queue에 삽입
+                for (int nxt : graph[end]) {
+                    if(visited[nxt]) continue;
+                    visited[nxt] = true;
+                    queue.add(nxt);
                 }
             }
-            // 마지막 Depth에서의 MAX값 출력
-            sb.append("#").append(tc).append(" ").append(max).append("\n");
+        }
+        // 마지막 Depth에서의 MAX값 출력
+        sb.append("#").append(tc).append(" ").append(max).append("\n");
         }
         System.out.println(sb);
     }
