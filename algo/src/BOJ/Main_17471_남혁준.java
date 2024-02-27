@@ -9,6 +9,7 @@ public class Main_17471_남혁준 {
     static boolean[] visited, checked;
     static List<Integer>[] edges;
 
+    // 부모 초기화
     static void init() {
         for (int i = 1; i <= N; i++) {
             root[i] = i;
@@ -122,7 +123,7 @@ public class Main_17471_남혁준 {
         StringBuilder sb = new StringBuilder();
 
         N = Integer.parseInt(br.readLine());
-        people = new int[N + 1];
+        people = new int[N + 1]; // 사람 수
         visited = new boolean[N + 1];
         checked = new boolean[N + 1];
         edges = new ArrayList[N + 1];
@@ -148,6 +149,7 @@ public class Main_17471_남혁준 {
             }
         }
 
+        // 예외처리?
         int same = 0;
         for (int i = 1; i <= N; i++) { // 두개의 선거구로 나눌 수 없는 경우 == 모두다 root[i] == i
             if (i == root[i]) {
