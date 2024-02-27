@@ -21,6 +21,7 @@ public class Main_17281_이중현 {
             }
         }
         makePerm(0, new int[9], new boolean[9]);
+        //check(new int[]{3, 1, 5, 0, 4, 8, 2, 6, 7});
         System.out.println(answer);
     }
     static void makePerm(int cnt, int[] hitter, boolean[] visited) {
@@ -47,9 +48,10 @@ public class Main_17281_이중현 {
         int cnt = 0; // hitter의 위치 찾기
         int score = 0;
         for (int inning = 0; inning < N; inning++) { // 이닝 진행
+            //System.out.println((inning+1) + "회 시작");
             int state = 0; // 1루, 2루, 3루, 홈 상태
             int outCnt = 0;
-            while (outCnt < 2) {
+            while (outCnt <= 2) {
                 int tar = hitters[inning][hitter[cnt]];
                 if (tar == 0) {
                     outCnt++;
@@ -71,7 +73,9 @@ public class Main_17281_이중현 {
                 }
                 cnt = (cnt+1)%9;
             }
+            //System.out.println((inning+1) + "회 점수: " + score);
         }
+        //System.out.println(Arrays.toString(hitter) + " -> " + score + "점");
         return score;
     }
 }
