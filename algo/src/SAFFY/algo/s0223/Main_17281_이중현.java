@@ -13,7 +13,6 @@ public class Main_17281_이중현 {
         StringTokenizer st;
         N = Integer.parseInt(br.readLine());
         hitters = new int[N][9];
-        //System.out.println(1<<1);
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
             for (int j = 0; j < 9; j++) {
@@ -21,12 +20,10 @@ public class Main_17281_이중현 {
             }
         }
         makePerm(0, new int[9], new boolean[9]);
-        //check(new int[]{3, 1, 5, 0, 4, 8, 2, 6, 7});
         System.out.println(answer);
     }
     static void makePerm(int cnt, int[] hitter, boolean[] visited) {
         if (cnt == 9) {
-            //System.out.println(Arrays.toString(hitter));
             answer = Math.max(answer, check(hitter));
             return;
         }
@@ -48,7 +45,6 @@ public class Main_17281_이중현 {
         int cnt = 0; // hitter의 위치 찾기
         int score = 0;
         for (int inning = 0; inning < N; inning++) { // 이닝 진행
-            //System.out.println((inning+1) + "회 시작");
             int state = 0; // 1루, 2루, 3루, 홈 상태
             int outCnt = 0;
             while (outCnt <= 2) {
@@ -57,25 +53,13 @@ public class Main_17281_이중현 {
                     outCnt++;
                 }
                 else {
-                    state <<= 1;
-                    state += 1;
-                    if ((state & (1 << 3)) != 0) {
-                        state -= (1<<3);
-                        score++;
-                    }
-                    for (int i = 1; i < tar; i++) {
-                        state <<= 1;
-                        if ((state & (1 << 3)) != 0) {
-                            state -= (1<<3);
-                            score++;
-                        }
-                    }
+                    state = (state + 1) << tar;
+                    score += Integer.bitCount(state >> 4);
+                    state %= 16;
                 }
                 cnt = (cnt+1)%9;
             }
-            //System.out.println((inning+1) + "회 점수: " + score);
         }
-        //System.out.println(Arrays.toString(hitter) + " -> " + score + "점");
         return score;
     }
 }
